@@ -1,53 +1,70 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { contractAddress, abi } from './utils/contract';
-import Swal from 'sweetalert2';
+import React, { createContext, useState, useEffect, useCallback } from "react";
+import { contractAddress, abi } from "./utils/contract";
+import Swal from "sweetalert2";
 const ethers = require("ethers");
 
 export const WalletContext = createContext();
 
 export const WalletProvider = ({ children }) => {
   const [walletConnected, setWalletConnected] = useState(false);
-  const [address, setAddress] = useState('');
-  const [balance, setBalance] = useState('0');
+  const [address, setAddress] = useState("");
+  const [balance, setBalance] = useState("0");
 
   const connectWallet = async () => {
-    if (window.ethereum) {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const network = await provider.getNetwork();
-      if (network.chainId !== 4042) {
-        Swal.fire({
-          icon: "error",
-          title: "Please connect to the Lisk Sepolia blockchain",
-          showConfirmButton: true,
+    try {
+      if (window.ethereum) {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const network = await provider.getNetwork();
+        if (Number(network.chainId) !== 4202) {
+          Swal.fire({
+            icon: "error",
+            title: "Please connect to the Lisk Sepolia blockchain",
+            showConfirmButton: true,
+          });
+          return;
+        }
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
         });
-        return;
+        setWalletConnected(true);
+        setAddress(accounts[0]);
+        getBalance(accounts[0]);
       }
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      setWalletConnected(true);
-      setAddress(accounts[0]);
-      getBalance(accounts[0]);
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Connect to Wallet",
+        showConfirmButton: true,
+      });
     }
   };
 
   const disconnectWallet = () => {
     setWalletConnected(false);
-    setAddress('');
-    setBalance('');
+    setAddress("");
+    setBalance("");
   };
 
-  const getBalance = useCallback(async (addr = address) => {
-    try {
-      if (window.ethereum && addr) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const piggyBankContract = new ethers.Contract(contractAddress, abi, signer);
-        const contractBalance = await piggyBankContract.getBalance(addr);
-        setBalance(ethers.formatEther(contractBalance));
+  const getBalance = useCallback(
+    async (addr = address) => {
+      try {
+        if (window.ethereum && addr) {
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await provider.getSigner();
+          const piggyBankContract = new ethers.Contract(
+            contractAddress,
+            abi,
+            signer
+          );
+          const contractBalance = await piggyBankContract.getBalance(addr);
+          setBalance(ethers.formatEther(contractBalance));
+        }
+      } catch (err) {
+        console.error("Failed to fetch balance from contract", err);
       }
-    } catch (err) {
-      console.error("Failed to fetch balance from contract", err);
-    }
-  }, [address]);
+    },
+    [address]
+  );
 
   useEffect(() => {
     if (address) {
@@ -56,14 +73,16 @@ export const WalletProvider = ({ children }) => {
   }, [address, getBalance]);
 
   return (
-    <WalletContext.Provider value={{
-      walletConnected,
-      address,
-      balance,
-      connectWallet,
-      disconnectWallet,
-      getBalance,
-    }}>
+    <WalletContext.Provider
+      value={{
+        walletConnected,
+        address,
+        balance,
+        connectWallet,
+        disconnectWallet,
+        getBalance,
+      }}
+    >
       {children}
     </WalletContext.Provider>
   );
