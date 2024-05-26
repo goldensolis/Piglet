@@ -28,7 +28,7 @@ const DepositWithdrawComponent = () => {
           title: 'Deposit Successful!',
           text: `${ethAmount} ETH has been deposited.`,
           showConfirmButton: true,
-          timer: 5000,
+          timer: 10000,
           didOpen: () => {
             const swalContainer = Swal.getHtmlContainer();
             const animationElement = document.createElement('div');
@@ -66,7 +66,7 @@ const DepositWithdrawComponent = () => {
           title: 'Withdraw Successful!',
           text: `${ethAmount} ETH has been withdrawn.`,
           showConfirmButton: true,
-          timer: 5000,
+          timer: 10000,
           didOpen: () => {
             const swalContainer = Swal.getHtmlContainer();
             const animationElement = document.createElement('div');

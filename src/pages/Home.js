@@ -20,7 +20,7 @@ const Home = () => {
             const signer = await provider.getSigner();
             const piggyBankContract = new ethers.Contract(contractAddress, abi, signer);
             const nomineeAddress = await piggyBankContract.getNominee(address);
-            setNominee(nomineeAddress !== ethers.constants.AddressZero ? nomineeAddress : 'No nominee set');
+            setNominee(nomineeAddress !== ethers.AddressZero ? nomineeAddress : 'No nominee set');
             await getBalance();
           }
         }

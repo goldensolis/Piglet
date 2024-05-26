@@ -27,7 +27,7 @@ const TransferComponent = ({  }) => {
           title: `Transfer Successful!`,
           text: `You transferred ${transferAmount} ETH`,
           showConfirmButton: true,
-          timer: 5000,
+          timer: 10000,
           didOpen: () => {
             const swalContainer = Swal.getHtmlContainer();
             const animationElement = document.createElement("div");
