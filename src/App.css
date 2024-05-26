@@ -1,0 +1,198 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #514C6A;
+  color: #3E384F;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+.navbar {
+  background: #3E384F;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 60px; 
+  margin-right: 10px;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding-top: 5rem; 
+  padding-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 0;
+  flex-grow: 1;
+}
+
+.card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #3E384F;
+}
+
+.card p {
+  margin: 0.5rem 0;
+  color: #3E384F;
+}
+
+.card input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #f8f9fa;
+  color: #514C6A;
+  box-sizing: border-box;
+}
+
+.card button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  opacity: 0.9;
+}
+
+.button-primary {
+  background-color: #3E384F;
+  color: white;
+}
+
+.button-secondary {
+  background-color: #6C757D;
+  color: white;
+}
+
+.button-danger {
+  background-color: #dc3545;
+  color: white;
+  margin-top: 1rem;
+}
+
+.footer {
+  background: #3E384F;
+  padding: 1rem;
+  text-align: center;
+  color: #ffffff;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.contract-info {
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
+  text-align: right;
+  color: #ffffff;
+}
+
+.ticker {
+  position: fixed;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  background: #000000;
+  color: #ffffff;
+  padding: 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ticker-item {
+  display: inline-block;
+  padding-right: 100%;
+  animation: ticker 40s linear infinite;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
