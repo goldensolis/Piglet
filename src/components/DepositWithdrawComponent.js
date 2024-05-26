@@ -44,7 +44,6 @@ const DepositWithdrawComponent = () => {
         Swal.fire({
           icon: 'error',
           title: 'Deposit Failed',
-          text: err.message,
           showConfirmButton: true,
         });
       }
@@ -83,7 +82,6 @@ const DepositWithdrawComponent = () => {
         Swal.fire({
           icon: 'error',
           title: 'Withdraw Failed',
-          text: err.message,
           showConfirmButton: true,
         });
       }
@@ -94,7 +92,7 @@ const DepositWithdrawComponent = () => {
     <div className="card-container">
       <div className="card">
         <h2>Deposit/Withdraw</h2>
-        <h3>Your Contract Balance: {balance} ETH</h3>
+        <h3>Piglet Contract Balance: {balance} ETH</h3>
         <input
           type="text"
           value={ethAmount}

@@ -52,7 +52,6 @@ const TransferComponent = ({  }) => {
         Swal.fire({
           icon: "error",
           title: "Failed to Transfer",
-          text: err.message,
           showConfirmButton: true,
         });
       }

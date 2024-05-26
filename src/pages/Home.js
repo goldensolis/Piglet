@@ -38,27 +38,22 @@ const Home = () => {
         {walletConnected ? (
           <>
             <button className="button-danger" onClick={disconnectWallet}>Disconnect</button>
-            <h2>Your Balance: {balance} ETH</h2>
-            <p>Your Address: {address}</p>
-            <p>Nominee: {nominee}</p>
-            <p>Total Liquidity: {totalLiquidity} ETH</p>
+            <h2>Piglet Balance: {balance} ETH</h2>
+            <p>Piglet Address: {address}</p>
+            <p>Piglet Nominee: {nominee}</p>
           </>
         ) : (
           <>
             <button className="button-primary" onClick={connectWallet}>Connect Wallet</button>
-            <h2>Your Balance: --</h2>
-            <p>Your Address: --</p>
-            <p>Nominee: --</p>
-            <p>Total Liquidity: --</p>
           </>
         )}
       </div>
       {walletConnected && (
         <div className="contract-info">
           <a href={`https://sepolia-blockscout.lisk.com/address/${contractAddress}`} target="_blank" rel="noopener noreferrer">
-            Contract Address: {contractAddress}
+            Piglet Contract Address: {contractAddress}
           </a>
-          <p>Total Liquidity: {totalLiquidity} ETH</p>
+          <p>Piglet Total Liquidity: {totalLiquidity} ETH</p>
         </div>
       )}
       <div className="ticker">

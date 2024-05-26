@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { contractAddress, abi } from './utils/contract';
+import Swal from 'sweetalert2';
 const ethers = require("ethers");
 
 export const WalletContext = createContext();
@@ -11,6 +12,16 @@ export const WalletProvider = ({ children }) => {
 
   const connectWallet = async () => {
     if (window.ethereum) {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const network = await provider.getNetwork();
+      if (network.chainId !== 4042) {
+        Swal.fire({
+          icon: "error",
+          title: "Please connect to the Lisk Sepolia blockchain",
+          showConfirmButton: true,
+        });
+        return;
+      }
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       setWalletConnected(true);
       setAddress(accounts[0]);
